@@ -30,11 +30,14 @@ function calcFor(str) {
     return res
 }
 
+
+let res = 0;
+let index = 0;
 function PascalStyle(str) {
-    let res = 0;
+    res = 0;
+    index = 0;
     str=str.split(' ');
-    let index = 0;
-    label1 : do {
+    label1 : while(true) {
         const a =  index === 0 ? str[index] : res;
         const b = str[index+1];
         const operator = str[index+2];
@@ -44,8 +47,8 @@ function PascalStyle(str) {
         if (index < str.length) {
             index+=2;
             continue label1;
-        } 
-    } while(0);
+        } break;
+    }
     return res
 }
 
@@ -55,6 +58,7 @@ console.log(calc('2 4 * 8 +') === 16)
 console.log(calc('10 15 - 3 *') === -15);
 console.log(calc('4 4 + 10 * 8 - -1 *'))
 console.log(calc('4 4 + 10 * 8 - -1 * 2 /'))
+
 console.log('calcWithoutEval')
 console.log(calcWithoutEval('3 4 +') === 7)
 console.log(calcWithoutEval('2 4 * 8 +') === 16)
@@ -70,9 +74,9 @@ console.log(calcFor('4 4 + 10 * 8 - -1 *'))
 console.log(calcFor('4 4 + 10 * 8 - -1 * 2 /'))
 
 console.log('PascalStyle')
-console.log(PascalStyle('3 4 +') === 7)
-console.log(PascalStyle('2 4 * 8 +') === 16)
-console.log(PascalStyle('10 15 - 3 *') === -15);
-console.log(PascalStyle('4 4 + 10 * 8 - -1 *'))
-console.log(PascalStyle('4 4 + 10 * 8 - -1 * 2 /'))
+console.log(PascalStyle('3 4 +') && res === 7)
+console.log(PascalStyle('2 4 * 8 +') && res === 16)
+console.log(PascalStyle('10 15 - 3 *')&& res === -15);
+console.log(PascalStyle('4 4 + 10 * 8 - -1 *')&& res)
+console.log(PascalStyle('4 4 + 10 * 8 - -1 * 2 /') && res)
 
