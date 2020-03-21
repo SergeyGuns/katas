@@ -11,16 +11,15 @@ const compose = (...fns) => initValue => fns.reduce((value, fn) => fn(value), in
 const reduce = (arr, cb, acc) => {
     if (arr.length === 0) return acc;
     const [currValue, ...tail] = arr;
-    const nextAcc = cb(currValue);
-    return reduce(tail, cb, acc.concat(nextAcc))
+    const nextAcc = cb(acc,currValue);
+    if(Array.isArray(acc)) return reduce(tail, cb, acc.concat(nextAcc));
+    if(typeof acc === 'object') return reduce(tail, cb, nextAcc);
+    //if string||number
+    return reduce(tail, cb, acc+nextAcc);
 }
 
-const map = (arr, cb) => {
-    const [curr, ...tail] = arr;
-    const result = cb(curr)
-    return tail.length ? [result].concat(map(tail, cb)) : result
-}
 
+console.log(reduce([1,2,3], (acc,currValue) => acc))
 
 const composed = compose(
     increment,
@@ -33,7 +32,6 @@ const doubleIncrement = compose(
     increment,
     increment
 )
-console.log(map([1, 2, 3, 4], doubleIncrement))
 
-const doubleIncrementRuduce = (arr) => reduce(arr, doubleIncrement, [])
+const doubleIncrementRuduce = (arr) => reduce(arr, doubleIncrement, '')
 
